@@ -1,0 +1,12 @@
+{
+  "name": "async-flow",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:Tomyail/async-flow.git",
+  "author": "xuexin <tomyail1989@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "rxjs": "^6.5.5"
+  }
+}
