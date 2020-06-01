@@ -8,5 +8,10 @@
   "dependencies": {
     "lodash": "^4.17.15",
     "rxjs": "^6.5.5"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./lib",
+    "compile": "tsc -p tsconfig.json"
   }
 }
