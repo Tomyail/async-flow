@@ -2,7 +2,7 @@ import _ from 'lodash'
 import { combineLatest, concat, defer, ObservableInput, of } from 'rxjs'
 import { map, mergeMap, reduce } from 'rxjs/operators'
 
-//https://stackblitz.com/edit/jo3dq1-c3kppz?file=index.ts
+// https://stackblitz.com/edit/jo3dq1-c3kppz?file=index.ts
 interface FlowConfig<T> {
   name: string
   flow: (context) => ObservableInput<T>
@@ -18,47 +18,48 @@ export const flow = <T>(
   flowConfigs: FlowConfig<T>[] | { [key: string]: FlowConfig<T> }
 ) => {
   if (_.isArray(flowConfigs)) {
-    //@ts-ignore
+    // @ts-ignore
     return flowArray(context, flowConfigs)
   } else {
-    //@ts-ignore
+    // @ts-ignore
     return flowMap(context, flowConfigs)
   }
 }
 
 const flowArray = <T>(context, flows: FlowConfig<T>[]) => {
-  return concat(...flows.map((flow) => flowOne(context, flow))).pipe(reduce(() => context, context))
+  return concat(...flows.map(flow => flowOne(context, flow))).pipe(reduce(() => context, context))
 }
 
 const flowMap = <T>(context: any, flows: { [key: string]: FlowConfig<T> }) => {
+  /* tslint:disable */
   return combineLatest(
     ...Object.keys(flows)
-      .map((key) => {
+      .map(key => {
         if (flows[key].name !== key) {
           throw new Error("flowConfig's key must save to name")
         }
         return key
       })
-      .map((key) => {
+      .map(key => {
         const config = flows[key]
         return flowOne(context, config)
       })
   ).pipe(
-    map((item) => {
+    map(item => {
       return context
     })
   )
 }
 const flowOne = <T>(context, config: FlowConfig<T>) => {
   return defer(() => config.flow(context)).pipe(
-    mergeMap((result) => {
+    mergeMap(result => {
       context[config.name] = config.map(result, context)
       if (config.children) {
         return flow(context, config.children)
       }
       return of(context[config.name])
     }),
-    map((result) => {
+    map(result => {
       return result
     })
   )
