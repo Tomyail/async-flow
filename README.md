@@ -2,7 +2,7 @@
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Greenkeeper badge](https://badges.greenkeeper.io/alexjoverm/typescript-library-starter.svg)](https://greenkeeper.io/)
-[![Travis](https://travis-ci.org/Tomyail/async-flow.svg)](https://travis-ci.org/github/Tomyail/async-flow)
+[![Build Status](https://travis-ci.org/Tomyail/async-flow.svg?branch=master)](https://travis-ci.org/Tomyail/async-flow)
 [![Coveralls](https://coveralls.io/repos/github/Tomyail/async-flow/badge.svg)](https://coveralls.io/github/Tomyail/async-flow)
 [![Dev Dependencies](https://david-dm.org/alexjoverm/typescript-library-starter/dev-status.svg)](https://david-dm.org/alexjoverm/typescript-library-starter?type=dev)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg)](https://paypal.me/AJoverMorales)
