@@ -98,11 +98,11 @@
     "lodash.camelcase": "4.3.0",
     "prettier": "2.0.5",
     "prompt": "1.0.0",
-    "replace-in-file": "3.4.4",
-    "rimraf": "2.7.1",
+    "rimraf": "3.0.2",
+    "replace-in-file": "6.0.0",
     "rollup": "0.68.2",
     "rollup-plugin-commonjs": "9.3.4",
-    "rollup-plugin-json": "3.1.0",
+    "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "3.4.0",
     "rollup-plugin-sourcemaps": "0.6.2",
     "rollup-plugin-typescript2": "0.27.1",
@@ -115,6 +115,6 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-config-standard": "8.0.1",
     "typedoc": "0.17.7",
-    "typescript": "3.9.3"
+    "typescript": "3.9.5"
   }
 }
