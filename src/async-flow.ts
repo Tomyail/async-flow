@@ -6,21 +6,28 @@ import { map, mergeMap, reduce } from 'rxjs/operators'
 interface FlowConfig<T> {
   name: string
   flow: (context) => ObservableInput<T>
-  map: (result, context) => any
+  map?: (result, context) => any
   children?:
-    | FlowConfig<T>[]
-    | {
-        [key: string]: FlowConfig<T>
-      }
+  | FlowConfig<T>[]
+  | {
+    [key: string]: FlowConfig<T>
+  }
 }
-export const flow = <T>(
+export const buildFlow = <T>(
   context,
-  flowConfigs: FlowConfig<T>[] | { [key: string]: FlowConfig<T> }
+  flowConfigs: FlowConfig<T>[] | { [key: string]: FlowConfig<T> } | FlowConfig<T>
 ) => {
   if (_.isArray(flowConfigs)) {
     // @ts-ignore
     return flowArray(context, flowConfigs)
   } else {
+    // if (flowConfigs['flow']) {
+    //    // @ts-ignore
+    //   return flowOne(context, flowConfigs).pipe(map(item=>{
+    //     context[flowConfigs['name']] = item
+    //     return context;
+    //   }))
+    // }
     // @ts-ignore
     return flowMap(context, flowConfigs)
   }
@@ -53,9 +60,9 @@ const flowMap = <T>(context: any, flows: { [key: string]: FlowConfig<T> }) => {
 const flowOne = <T>(context, config: FlowConfig<T>) => {
   return defer(() => config.flow(context)).pipe(
     mergeMap(result => {
-      context[config.name] = config.map(result, context)
+      context[config.name] = config.map ? config.map(result, context) : result
       if (config.children) {
-        return flow(context, config.children)
+        return buildFlow(context, config.children)
       }
       return of(context[config.name])
     }),
