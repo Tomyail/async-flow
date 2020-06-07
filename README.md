@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/Tomyail/async-flow.svg?branch=master)](https://travis-ci.org/Tomyail/async-flow)
 [![Coverage Status](https://coveralls.io/repos/github/Tomyail/async-flow/badge.svg?branch=master)](https://coveralls.io/github/Tomyail/async-flow?branch=master)
-[![Dev Dependencies](https://david-dm.org/alexjoverm/typescript-library-starter/dev-status.svg)](https://david-dm.org/alexjoverm/typescript-library-starter?type=dev)
 
 
 async-flow 是一个基于 [rxjs](https://rxjs-dev.firebaseapp.com/)的异步逻辑处理库.它的目的是用一种声明式的方式定义异步逻辑,并且尽可能的隐藏 rxjs 操作符的复杂性.
