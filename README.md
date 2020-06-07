@@ -38,7 +38,7 @@ flow 使用 flowConfig 来定义一个异步逻辑,一个 flowConfig 是一个�
 
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=basic-usage.ts
 
-import { buildFlow } from "./async-flow";
+import { buildFlow } from "@tomyail/async-flow";
 // basic usage
 const flowConfig = {
   //flow 的名称
@@ -71,7 +71,7 @@ flowConfig 的 map 方法可以用来处理 flow 异步响应后的逻辑.通常
 
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=basic_usage_with_map.ts
 
-import { buildFlow } from "./async-flow";
+import { buildFlow } from "@tomyail/async-flow";
 // basic usage
 const flowConfig = {
   //flow 的名称
@@ -102,7 +102,7 @@ asyncFlow.subscribe(context => {
 
 ```JavaScript
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=queue_flow.ts
-import { buildFlow } from "./async-flow";
+import { buildFlow } from "@tomyail/async-flow";
 // basic usage
 const asyncTask1 = {
   //flow 的名称
@@ -138,7 +138,7 @@ asyncFlow.subscribe(context => {
 
 ```
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=parallel_flow.ts
-import { buildFlow } from "./async-flow";
+import { buildFlow } from "@tomyail/async-flow";
 // basic usage
 const asyncTask1 = {
   //flow 的名称
@@ -176,7 +176,7 @@ asyncFlow.subscribe(context => {
 ```
 
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=children_flow.ts
-import { buildFlow } from "./async-flow";
+import { buildFlow } from "@tomyail/async-flow";
 // basic usage
 const asyncTask1 = {
   //flow 的名称
@@ -252,7 +252,7 @@ flowConfig 里面的 flow 的返回值不仅仅可以是 promise,它还可以是
 ```
 
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=nest_flow.ts
-import { buildFlow } from "./async-flow";
+import { buildFlow } from "@tomyail/async-flow";
 
 const childFlowConfig = {
   //flow 的名称
