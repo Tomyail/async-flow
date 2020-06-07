@@ -1,7 +1,7 @@
 # Async Flow
 
 [![Build Status](https://travis-ci.org/Tomyail/async-flow.svg?branch=master)](https://travis-ci.org/Tomyail/async-flow)
-[![Coveralls](https://coveralls.io/repos/github/Tomyail/async-flow/badge.svg)](https://coveralls.io/github/Tomyail/async-flow)
+[![Coverage Status](https://coveralls.io/repos/github/Tomyail/async-flow/badge.svg?branch=master)](https://coveralls.io/github/Tomyail/async-flow?branch=master)
 [![Dev Dependencies](https://david-dm.org/alexjoverm/typescript-library-starter/dev-status.svg)](https://david-dm.org/alexjoverm/typescript-library-starter?type=dev)
 
 
