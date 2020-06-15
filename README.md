@@ -135,7 +135,7 @@ asyncFlow.subscribe(context => {
 当 `buildFlow` 的第二个参数是 flowConfig 对象时. 这个对象的每一项都会并行执行.
 所以相邻的异步逻辑无法获取其他异步逻辑的结果. 并行定义 flow 时,flowConfig 哈希的每一项的 key 必须和 flowConfig 的 name 一致,否则会报错.
 
-```
+```JavaScript
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=parallel_flow.ts
 import { buildFlow } from "@tomyail/async-flow";
 // basic usage
@@ -172,8 +172,7 @@ asyncFlow.subscribe(context => {
 
 每个 flowConfig 可以定义 children 属性,其类型可以是数组或者flowConfig 哈希.在其父异步逻辑执行完毕后,将会执行 children flow.
 
-```
-
+```JavaScript
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=children_flow.ts
 import { buildFlow } from "@tomyail/async-flow";
 // basic usage
@@ -248,8 +247,8 @@ asyncFlow.subscribe(context => {
 
 
 flowConfig 里面的 flow 的返回值不仅仅可以是 promise,它还可以是其他 [Observable](https://rxjs-dev.firebaseapp.com/guide/observable). 由于 buildFlow 本身就会产生一个 Observable,所以可以嵌套使用. 嵌套使用的时候 context 不会被打平.
-```
 
+```JavaScript
 // 在线预览地址(将 index 文件替换为此文件): https://stackblitz.com/edit/ypzuhr-lkli1h?file=nest_flow.ts
 import { buildFlow } from "@tomyail/async-flow";
 
@@ -294,6 +293,5 @@ asyncFlow.subscribe(context => {
   //   parentFlowConfig2: 2;
   // }
 });
-
 ```
 
