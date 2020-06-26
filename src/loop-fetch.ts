@@ -1,7 +1,6 @@
 import isFunction from 'lodash/isFunction'
-import { empty, Observable, race, timer } from 'rxjs'
+import { EMPTY, Observable, race, timer } from 'rxjs'
 import { delay, expand, first, mapTo, skip, skipWhile, startWith } from 'rxjs/operators'
-
 /**
  * 寻轮某个接口,当其返回特定的值后,停止轮训
  * @param input 主要的异步逻辑
@@ -15,12 +14,12 @@ export const loopFetch = <T>(
   time: number,
   delayTime: (() => number) | number
 ) => {
-  const loop$ = empty().pipe(
+  const loop$ = EMPTY.pipe(
     startWith({}),
     expand((v) => {
       return input().pipe(delay(isFunction(delayTime) ? delayTime() : delayTime))
     }),
-    //第一个值是 startWith 的默认值,不用传给conditionFn,所以忽略
+    // 第一个值是 startWith 的默认值,不用传给conditionFn,所以忽略
     skip(1),
     skipWhile(conditionFn),
     first()
