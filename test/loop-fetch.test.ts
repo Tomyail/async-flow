@@ -1,6 +1,10 @@
 import { loopFetch } from '../src/loop-fetch'
 import { defer } from 'rxjs'
+import { TestScheduler } from 'rxjs/testing'
 describe('loop fetch test', () => {
+  const testScheduler = new TestScheduler((actual, expected) => {
+    expect(actual).toEqual(expected)
+  })
   const makeSuccessPromise = () => {
     let callTime = 0
 
@@ -29,6 +33,11 @@ describe('loop fetch test', () => {
   }
 
   it('test with retry', () => {
+    testScheduler.run((helpers) => {
+      const { cold, expectObservable, expectSubscriptions } = helpers;
+
+      const e1 = cold('')
+    })
     let retryTime = 0
     const promise = makeSuccessPromise()
     loopFetch(
