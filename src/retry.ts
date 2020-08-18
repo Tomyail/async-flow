@@ -13,6 +13,10 @@ interface RetryConfig {
    * 当 conditionPromiseFn resolve 之后,立刻执行的钩子函数
    */
   onRetry?: (error) => void
+  /**
+   * 当重试成功后触发
+   */
+  onRetrySuccess?: () => void
 }
 /**
  * @param promiseFn 主要异步逻辑,异常会触发重试
@@ -25,10 +29,12 @@ export const retry = <T extends any, M extends RetryConfig>(
   config?: M
 ) => {
   const cfg = config
+  let isFromRetry = false
   return from(defer(promiseFn)).pipe(
     retryWhen((e) => {
       return e.pipe(
         tap((err) => {
+          isFromRetry = false
           cfg?.onError?.call(null, err)
         }),
         filter((err) => {
@@ -36,12 +42,17 @@ export const retry = <T extends any, M extends RetryConfig>(
         }),
         mergeMap((err) => from(defer(() => conditionPromiseFn(err, cfg)))),
         tap((err) => {
+          isFromRetry = true
           cfg?.onRetry?.call(null, err)
         }),
         delayWhen(() => timer(200))
       )
     }),
+    tap(() => {
+      if (isFromRetry) cfg?.onRetrySuccess?.call(null)
+    }),
     //用户点击了取消
+    //todo 是否需要捕获,还是抛出去让业务处理
     catchError((e) => {
       return NEVER
     })
