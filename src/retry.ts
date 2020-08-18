@@ -19,6 +19,39 @@ interface RetryConfig {
   onRetrySuccess?: () => void
 }
 /**
+ *
+ * @example
+       +---------------------------------------------------------------------------------------------------------------+
+       |                                                                                                               |
+       |                                                                                                               |
+       |                                                                                                               |
+       |                                                                                                               |
+       |                                                                                                        +---resolve->
+       |                                                                                                        |
+       |                                                                                                        |
+       |                                                                                                        |
+       |                                                                                                        |
+       |                                                                  +--true->-----4cfg.conditionPromiseFn-+
+       |                                                                  |                                     |
+       |                                                                  |                                     |
+       |                                                                  |                                     |
+       |           +-failed-->----2cfg.onError--->---3cfg.errorFilter---->+                                     +----reject> done
+       |           |                                                      |
+       |           |                                                      |
+       v           |                                                      +--false->
+    +-1promiseFn---+
+       |           |
+       |           |
+       |           +-success->  done
+       |
+       |
+       |
+       |
+       |
+       |
+       |
+       v
+5cfg.onStartRetry
  * @param promiseFn 主要异步逻辑,异常会触发重试
  * @param conditionPromiseFn promiseFn 触发异常后,这个函数resolve 会触发重试,否则不重试
  * @param config
