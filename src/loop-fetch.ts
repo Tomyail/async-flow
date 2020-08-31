@@ -1,6 +1,6 @@
 import isFunction from 'lodash/isFunction'
-import { EMPTY, Observable, race, timer } from 'rxjs'
-import { delay, expand, first, mapTo, skip, skipWhile, startWith } from 'rxjs/operators'
+import { defer, iif, Observable, of, race, timer } from 'rxjs'
+import { delay, expand, first, mapTo, skipWhile, take } from 'rxjs/operators'
 /**
  * 寻轮某个接口,当其返回特定的值后,停止轮训
  * @param input 主要的异步逻辑
@@ -11,21 +11,20 @@ import { delay, expand, first, mapTo, skip, skipWhile, startWith } from 'rxjs/op
 export const loopFetch = <T>(
   input: () => Observable<T>,
   conditionFn: (result: T) => boolean,
-  time: number,
-  delayTime: (() => number) | number
+  time: number = 0,
+  delayTime: (() => number) | number = 0
 ) => {
-  const loop$ = EMPTY.pipe(
-    startWith({}),
+  const loop$ = defer(() => input()).pipe(
     expand((v) => {
-      return input().pipe(delay(isFunction(delayTime) ? delayTime() : delayTime))
+      return iif(
+        () => conditionFn(v),
+        defer(() => input()),
+        defer(() => of(v))
+      ).pipe(delay(isFunction(delayTime) ? delayTime() : delayTime))
     }),
-    // 第一个值是 startWith 的默认值,不用传给conditionFn,所以忽略
-    skip(1),
     skipWhile(conditionFn),
-    first()
+    take(1)
   )
 
-  const timeout$ = timer(time).pipe(mapTo<number, 'timeout'>('timeout'))
-
-  return race(timeout$, loop$).pipe(first())
+  return iif(() => time > 0, race(timer(time).pipe(mapTo('timeout')), loop$).pipe(first()), loop$)
 }
