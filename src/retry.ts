@@ -17,6 +17,12 @@ interface RetryConfig {
    * 当重试成功后触发
    */
   onRetrySuccess?: () => void
+  /** 重试的额外配置,适合拓展 */
+  extraConfig?: any
+  /**
+   * 当重试还是失败后,是否抛出错误
+   */
+  throwFinalError?: boolean
 }
 /**
  *
@@ -89,6 +95,9 @@ export const retry = <T extends any, M extends RetryConfig>(
     //用户点击了取消
     //todo 是否需要捕获,还是抛出去让业务处理
     catchError((e) => {
+      if (cfg?.throwFinalError) {
+        throw e;
+      }
       return NEVER
     })
   )
