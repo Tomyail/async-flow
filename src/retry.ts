@@ -69,9 +69,11 @@ export const retry = <T extends any, M extends RetryConfig>(
         tap((err) => {
           isFromRetry = false
           cfg?.onError?.call(null, err)
-        }),
-        filter((err) => {
-          return cfg?.errorFilter?.call(null, err) ?? true
+          if (cfg?.errorFilter) {
+            if (!cfg.errorFilter(err)) {
+              throw err
+            }
+          }
         }),
         mergeMap((err) => from(defer(() => conditionPromiseFn(err, cfg)))),
         tap((err) => {
