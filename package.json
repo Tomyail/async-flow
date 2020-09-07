@@ -94,7 +94,7 @@
     "coveralls": "3.1.0",
     "cross-env": "7.0.2",
     "cz-conventional-changelog": "3.2.0",
-    "husky": "4.2.5",
+    "husky": "4.3.0",
     "jest": "26.0.1",
     "jest-config": "26.0.1",
     "lint-staged": "10.2.11",
