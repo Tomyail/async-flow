@@ -90,7 +90,7 @@
     "@types/node": "10.17.26",
     "@types/lodash": "^4.14.157",
     "colors": "1.4.0",
-    "commitizen": "4.1.2",
+    "commitizen": "4.2.2",
     "coveralls": "3.1.0",
     "cross-env": "7.0.2",
     "cz-conventional-changelog": "3.2.0",
