@@ -1,6 +1,9 @@
-import isFunction from 'lodash/isFunction'
 import { defer, iif, Observable, of, race, timer } from 'rxjs'
 import { delay, expand, first, mapTo, skipWhile, take } from 'rxjs/operators'
+
+function isFunction(functionToCheck): functionToCheck is Function {
+  return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]'
+}
 /**
  * 寻轮某个接口,当其返回特定的值后,停止轮训
  * @param input 主要的异步逻辑
