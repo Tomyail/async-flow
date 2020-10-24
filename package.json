@@ -3,9 +3,13 @@
   "version": "0.0.2",
   "description": "",
   "keywords": [],
-  "main": "dist/async-flow.umd.js",
-  "module": "dist/async-flow.es5.js",
-  "typings": "dist/types/async-flow.d.ts",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "esmodule": "dist/index.modern.js",
+  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -15,26 +19,15 @@
     "url": "https://github.com/Tomyail/async-flow"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=6.0.0"
-  },
   "scripts": {
-    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
-    "start": "rollup -c rollup.config.ts -w",
-    "test": "jest --coverage",
-    "test:watch": "jest --coverage --watch",
-    "test:prod": "npm run lint && npm run test -- --no-cache",
-    "deploy-docs": "ts-node tools/gh-pages-publish",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
+    "build": "microbundle --no-sourcemap --no-compress",
+    "start": "microbundle watch --no-sourcemap --no-compress",
+    "test": "echo todo",
+    "test:prod": "echo todo",
     "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once",
-    "prepush": "npm run test:prod && npm run build",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
+    "prepush": "npm run test:prod && npm run build"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -47,33 +40,6 @@
       "path": "node_modules/cz-conventional-changelog"
     }
   },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "ts-jest"
-    },
-    "testEnvironment": "node",
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 0,
-        "functions": 0,
-        "lines": 0,
-        "statements": 0
-      }
-    },
-    "collectCoverageFrom": [
-      "src/*.{js,ts}"
-    ]
-  },
   "prettier": {
     "semi": false,
     "singleQuote": true
@@ -84,40 +50,18 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
-    "@types/jest": "26.0.0",
-    "@types/node": "10.17.26",
-    "@types/lodash": "^4.14.157",
-    "colors": "1.4.0",
     "commitizen": "4.1.2",
-    "coveralls": "3.1.0",
-    "cross-env": "7.0.2",
     "cz-conventional-changelog": "3.2.0",
     "husky": "4.2.5",
-    "jest": "26.0.1",
-    "jest-config": "26.0.1",
     "lint-staged": "10.2.11",
-    "lodash.camelcase": "4.3.0",
-    "prettier": "2.0.5",
-    "prompt": "1.0.0",
+    "microbundle": "0.12.4",
+    "prettier": "^2.1.2",
     "rimraf": "3.0.2",
-    "replace-in-file": "6.1.0",
-    "rollup": "2.16.1",
-    "rollup-plugin-commonjs": "10.1.0",
-    "rollup-plugin-json": "4.0.0",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-sourcemaps": "0.6.2",
-    "rollup-plugin-typescript2": "0.27.1",
     "semantic-release": "17.0.8",
-    "shelljs": "0.8.4",
-    "travis-deploy-once": "5.0.11",
-    "ts-jest": "26.1.0",
-    "ts-node": "8.10.2",
-    "tslint": "5.20.1",
-    "tslint-config-prettier": "1.18.0",
-    "tslint-config-standard": "9.0.0",
-    "typedoc": "0.17.7",
-    "typescript": "3.9.5"
+    "typescript": "4.0.3"
+  },
+  "dependencies": {
+    "rxjs": "^6.6.3"
   }
 }

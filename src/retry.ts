@@ -1,5 +1,5 @@
-import { defer, from, timer, Observable, NEVER } from 'rxjs'
-import { retryWhen, tap, filter, mergeMap, delayWhen, catchError } from 'rxjs/operators'
+import { defer, from, NEVER, Observable, timer } from 'rxjs'
+import { catchError, delayWhen, mergeMap, retryWhen, tap } from 'rxjs/operators'
 interface RetryConfig {
   /**
    * 错误过滤函数,只有返回是 true 的错误才会进入错误重试流程
