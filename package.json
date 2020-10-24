@@ -1,6 +1,6 @@
 {
   "name": "@tomyail/async-flow",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "keywords": [],
   "source": "src/index.ts",
@@ -27,7 +27,8 @@
     "test:prod": "echo todo",
     "semantic-release": "semantic-release",
     "precommit": "lint-staged",
-    "prepush": "npm run test:prod && npm run build"
+    "prepush": "npm run test:prod && npm run build",
+    "postversion": "git push --tags && yarn publish . --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\""
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
