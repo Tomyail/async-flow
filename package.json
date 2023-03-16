@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "11.0.0",
-    "commitizen": "4.1.2",
+    "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.2.0",
     "husky": "4.3.5",
     "lint-staged": "10.5.3",
